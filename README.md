@@ -72,3 +72,210 @@ If the power doesn't exist, render a JSON response with an error message and a 4
 Retrieve the hero and power with the given ids from the database
 If the hero and power exist and the strength is valid, create a new HeroPower with the given attributes
 If the hero and power don't exist or the strength is invalid, return an error message with appropriate status code.
+
+
+## Getting Started
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
+
+### Prerequisites
+To run this project, you will need:
+
+Ruby 2.7.4
+Rails 6.1.4
+Postgres
+
+
+### Installing
+- Clone the repository:
+
+    - git clone https://github.com/ismahaneyy/SuperHeroess
+
+- Navigate into the project directory:
+
+    - cd Superheroes
+
+- Install dependencies:
+
+    - bundle install
+
+- Set up the database:
+
+    - rails db:create
+    - rails db:migrate
+    - rails db:seed
+- Start the server:
+
+    - rails s
+
+- The API will be available at http://localhost:3000.
+
+- Test the endpoints using a tool like Postman or cURL.
+
+#### Endpoints
+
+- GET /heroes
+Returns a list of all heroes in the database.
+
+Response
+
+200 OK on success
+
+[
+  {
+    "id": 1,
+    "name": "Kamala Khan",
+    "super_name": "Ms. Marvel"
+  },
+  {
+    "id": 2,
+    "name": "Doreen Green",
+    "super_name": "Squirrel Girl"
+  },
+  {
+    "id": 3,
+    "name": "Gwen Stacy",
+    "super_name": "Spider-Gwen"
+  }
+]
+
+
+- GET /heroes/:id
+Returns the hero with the specified ID.
+
+Response
+
+200 OK on success
+404 Not Found if hero not found
+
+{
+  "id": 1,
+  "name": "Kamala Khan",
+  "super_name": "Ms. Marvel",
+  "powers": [
+    {
+      "id": 1,
+      "name": "super strength",
+      "description": "gives the wielder super-human strengths"
+    },
+    {
+      "id": 2,
+      "name": "flight",
+      "description": "gives the wielder the ability to fly through the skies at supersonic speed"
+    }
+  ]
+}
+
+{
+  "error": "Hero not found"
+}
+
+
+- GET /powers
+Returns a list of all powers in the database.
+
+Response
+
+200 OK on success
+
+[
+  {
+    "id": 1,
+    "name": "super strength",
+    "description": "gives the wielder super-human strengths"
+  },
+  {
+    "id": 2,
+    "name": "flight",
+    "description": "gives the wielder the ability to fly through the skies at supersonic speed"
+  }
+]
+
+
+- GET /powers/:id
+Returns the power with the specified ID.
+
+Response
+
+200 OK on success
+404 Not Found if power not found
+
+{
+  "id": 1,
+  "name": "super strength",
+  "description": "gives the wielder super-human strengths"
+}
+
+{
+  "error": "Power not found"
+}
+
+
+- PATCH /powers/:id
+Updates the power with the specified ID.
+
+Request Body
+
+    {
+        "description": "Updated description"
+    }
+
+Response
+
+200 OK on success
+404 Not Found if power not found
+422 Unprocessable Entity if validation fails
+
+{
+  "id": 1,
+  "name": "super strength",
+  "description": "Updated description"
+}
+
+{
+  "error": "Power not found"
+}
+
+{
+  "errors": ["Description can't be blank"]
+}
+
+
+- POST /hero_powers
+Creates a new HeroPower that is associated with an existing Power and Hero.
+
+Request Body
+
+{
+  "strength": "Average",
+  "power_id": 1,
+  "hero_id": 3
+}
+
+
+Response
+
+201 Created on success
+422 Unprocessable Entity if validation fails
+
+{
+  "id": 1,
+  "name": "Kamala Khan",
+  "super_name": "Ms. Marvel",
+  "hero_powers": [
+    {
+      "id": 1,
+      "strength": "Average",
+      "power_id": 1,
+      "hero_id": 3
+    }
+  ]
+}
+
+
+### Author:
+
+[Ismahan Abdirizak] (https://github.com/ismahaneyy)
+
+### License
+
+This project is licensed under the MIT License

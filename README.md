@@ -62,7 +62,7 @@ Retrieve the power with the given id from the database
 If the power exists, render a JSON response with its name and description
 If the power doesn't exist, render a JSON response with an error message and a 404 status code
 
-5. pdating a power
+5. Updating a power
 Retrieve the power with the given id from the database
 If the power exists and the new description is valid, update the power's description
 If the power exists and the new description is invalid, render a JSON response with an error message and a 422 status code
@@ -108,6 +108,8 @@ Postgres
     - rails s
 
 - The API will be available at http://localhost:3000.
+- The deployed link is:
+     [https://superheroess-ushh.onrender.com]
 
 - Test the endpoints using a tool like Postman or cURL.
 
